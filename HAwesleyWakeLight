@@ -1,0 +1,66 @@
+alias: Wesley wake light
+description: ""
+triggers:
+  - trigger: time
+    at: "07:30:00"
+conditions:
+  - condition: time
+    weekday:
+      - sat
+      - fri
+      - thu
+      - wed
+      - tue
+      - mon
+      - sun
+    enabled: true
+    after: "00:00:00"
+    before: "23:59:00"
+actions:
+  - parallel:
+      - action: light.turn_on
+        metadata: {}
+        data:
+          transition: 30
+          rgb_color:
+            - 0
+            - 255
+            - 0
+          brightness_pct: 20
+        target:
+          device_id: 69dda4c2b99dbcf4d4857408ba9ffc12
+      - action: light.turn_on
+        metadata: {}
+        data:
+          rgb_color:
+            - 0
+            - 0
+            - 255
+          transition: 30
+          brightness_pct: 20
+        target:
+          device_id:
+            - 661b18d37373b3c283529d44db2c816a
+  - delay:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - action: light.turn_on
+    metadata: {}
+    data:
+      brightness_pct: 100
+      color_temp_kelvin: 4148
+      transition: 0
+    target:
+      device_id:
+        - 661b18d37373b3c283529d44db2c816a
+        - 69dda4c2b99dbcf4d4857408ba9ffc12
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      device_id:
+        - 661b18d37373b3c283529d44db2c816a
+        - 69dda4c2b99dbcf4d4857408ba9ffc12
+mode: single
